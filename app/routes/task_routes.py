@@ -16,13 +16,13 @@ def get_db():
 #Criar Tarefas
 @router.post("/tasks")
 def criar_task(task: TaskCreate, db: Session = Depends(get_db)):
-    criar_task = Task(**task.dict())
+    new_task = Task(**task.dict())
 
-    db.add(criar_task)
+    db.add(new_task)
     db.commit()
-    db.refresh(criar_task)
+    db.refresh(new_task)
 
-    return criar_task
+    return new_task
 
 #Listar Tarefas
 @router.get("/tasks")
@@ -34,7 +34,7 @@ def listar_tasks(db: Session = Depends(get_db)):
 
 
 #Buscar Tarefa por ID
-@router.get("/task")
+@router.get("/tasks/{task_id}")
 def pegar_tarefa(task_id: int, db: Session = Depends(get_db)):
 
     task = db.query(Task).filter(Task.id == task_id).first()
@@ -53,9 +53,9 @@ def atualizar_task(task_id: int, updated_task: TaskCreate, db: Session = Depends
     if not task:
         raise HTTPException(status_code=404, detail="Tarefa nao encontrada")
     
-    task.titulo = atualizar_task.titulo
-    task.descricao = atualizar_task.descricao
-    task.prioridade = atualizar_task.prioridade
+    task.titulo = updated_task.titulo
+    task.descricao = updated_task.descricao
+    task.prioridade = updated_task.prioridade
 
     db.commit()
     db.refresh(task)
@@ -75,6 +75,7 @@ def concluida_task(task_id: int, db: Session = Depends(get_db)):
     task.concluida = True
 
     db.commit()
+    db.refresh(task)
 
     return {"message": "Tarefa concluida!"}
 
