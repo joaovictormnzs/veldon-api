@@ -3,17 +3,17 @@ from typing import Optional
 from datetime import datetime
 
 class TaskCreate(BaseModel):
-    titulo : str
-    descricao: Optional[str]
-    prioridade: str
+    tittle : str
+    description: Optional[str]
+    priority: str
 
 class TaskResponde(BaseModel):
     id: int
-    titulo: str
-    descricao: Optional[str]
-    prioridade: str
-    concluida: bool
-    criado_em: datetime
+    tittle: str
+    description: Optional[str]
+    priority: str
+    conmpleted: bool
+    created_by: datetime
 
     class Config:
         orm_mode = True
