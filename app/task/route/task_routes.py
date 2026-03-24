@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.task.controller import task_controller
-from app.task.schema.task_schema import TaskCreate, TaskResponse
+from app.task.schema.task_schema import TaskCreate
 
 router = APIRouter()
 
@@ -14,17 +14,17 @@ def get_db():
         db.close()
 
 
-@router.post("/tasks", response_model=TaskResponse)
+@router.post("/tasks")
 def criar_task(task: TaskCreate, db: Session = Depends(get_db)):
     return task_controller.criar_task(task, db)
 
 
-@router.get("/tasks", response_model=list[TaskResponse])
+@router.get("/tasks")
 def listar_tasks(db: Session = Depends(get_db)):
     return task_controller.listar_tasks(db)
 
 
-@router.get("/tasks/{task_id}", response_model=TaskResponse)
+@router.get("/tasks/{task_id}")
 def pegar_tarefa(task_id: int, db: Session = Depends(get_db)):
     return task_controller.pegar_tarefa(task_id, db)
 

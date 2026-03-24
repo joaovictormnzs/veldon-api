@@ -3,13 +3,13 @@ from typing import Optional
 from datetime import datetime
 
 class TaskCreate(BaseModel):
-    tittle : str
+    title : str
     description: Optional[str]
     priority: str
 
-class TaskResponde(BaseModel):
+class TaskResponse(BaseModel):
     id: int
-    tittle: str
+    title: str
     description: Optional[str]
     priority: str
     conmpleted: bool

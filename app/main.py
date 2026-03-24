@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes.task_routes import router
+from app.task.routes.task_routes import router
 from app.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
