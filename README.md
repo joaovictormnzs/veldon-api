@@ -7,9 +7,11 @@ Esta API foi desenvolvida com o objetivo de simular um sistema de gerenciamento 
 ## 👥 Tipos de Usuários
 
 - **Líder**
+
    Pode criar tarefas para si e para seus subordinados
 
 - **Liderado**
+
    Pode criar suas próprias tarefas (dependendo da configuração)
 
 ## 🔒 Regras do Sistema
