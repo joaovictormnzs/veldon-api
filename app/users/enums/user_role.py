@@ -1,5 +1,5 @@
 import enum
 
-class UserRoler(str, enum.Enum):
+class UserRole(str, enum.Enum):
     lider = "Lider"
     liderado = "Liderado" 

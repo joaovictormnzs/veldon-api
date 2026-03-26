@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.users.enums.user_Roler import UserRole
+from app.users.enums.user_role import UserRole
 
 class UserCreate(BaseModel):
     name: str
@@ -11,4 +11,7 @@ class UserResponse(BaseModel):
     role: UserRole
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+    
+    
+     
