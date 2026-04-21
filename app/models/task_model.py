@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Enum
 from datetime import datetime
 from app.database import Base
+from app.enums.task_priority import TaskPriority
 
 class Task(Base):
 
@@ -9,7 +10,7 @@ class Task(Base):
         id = Column(Integer, primary_key=True, index=True)
         title = Column(String)
         description = Column(String)
-        priority = Column(String)
+        priority = Column(Enum(TaskPriority), default=TaskPriority.BAIXA, nullable=False)
         completed = Column(Boolean, default=False)
         created_by_id = Column(Integer, ForeignKey("users.id"))
         assigned_to_id = Column(Integer, ForeignKey("users.id"))

@@ -1,7 +1,15 @@
+from fastapi import HTTPException, status
 from app.models.user_model import User
 from app.models.task_model import Task
+from app.enums.user_role import UserRole
+
+secret_key = "joao123"
 
 def criar_user(user_data, db):
+
+    if user_data.role == UserRole.lider:
+        if user_data.access_key != secret_key:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Acesso negado: Chave de líder inválida.")
 
     new_user = User(
         name=user_data.name,
